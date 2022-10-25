@@ -1,0 +1,3 @@
+[submodule "CMapJS"]
+	path = CMapJS
+	url = git@github.com:paulviville/CMapJS.git
