@@ -40,7 +40,7 @@
 		</script>
 
 		<script type="module">
-			let slides = new Array();
+			const slides = new Array();
 		</script>
 		<!-- <div id="stats"></div> -->
 		
@@ -49,9 +49,17 @@
 
 				
 				<!-- Intro -->
-				<section include-slide="./Slides/slide_titre.html" data-visibility="uncounted"></section>
-				<section include-slide="./Slides/slide_objectifs.html"></section>
-				<section include-slide="./Slides/slide_context.html"></section>
+				<section id="Echaf0" include-slide="./Slides/9_echafaudage.html"></section>
+				<section id="Title" include-slide="./Slides/0_titre.html" data-visibility="uncounted"></section>
+				<section id="HexMesh" include-slide="./Slides/1_hexmesh.html"></section>
+				<section id="Methodes" include-slide="./Slides/2_methodes.html"></section>
+				<section id="Algo1D" include-slide="./Slides/3_algo1D.html"></section>
+				<section id="Squelettes" include-slide="./Slides/4_squelettes.html"></section>
+				<section id="Algo1DSteps" include-slide="./Slides/5_algo1D_steps.html"></section>
+				<section id="Blocs" include-slide="./Slides/6_construction_blocs.html"></section>
+				<section id="Adaptation" include-slide="./Slides/7_adaptation.html"></section>
+				<section id="Analyse" include-slide="./Slides/8_analyse.html"></section>
+
 				<!-- <section include-slide=""></section> -->
 				<!-- <section include-slide=""></section> -->
 				
@@ -66,19 +74,44 @@
 			import Reveal from './Reveal/reveal.esm.js'
 
 			import Slide from './Slides/Slide.js';
-			import {slide_objectif} from './Slides/slide_objectif.js';
+			import {slide_squelettes} from './Slides/4_squelettes.js';
+			import {slide_titre} from './Slides/0_titre.js';
+
+			slides["Titre"] = slide_titre;
+			slides["Squelettes"] = slide_squelettes;
+
+			let active_slide;
+			Reveal.addEventListener('slidechanged', function(event) {
+				if(active_slide) active_slide.close();
+				var sectionID = Reveal.getCurrentSlide().id;
+				active_slide = slides[sectionID]
+				if(active_slide) active_slide.open();
+			});
+
+			const fragment_events = [];
+			Reveal.addEventListener('fragmentshown', function(event) {
+				if(fragment_events[event.fragment.id])
+					fragment_events[event.fragment.id]();
+			});
+			Reveal.addEventListener('fragmenthidden', function(event) {
+				if(fragment_events[event.fragment.id])
+					fragment_events[event.fragment.id]();
+			});
+
 
 			Reveal.initialize({
 				touch: false, 
 				slideNumber: 'c/t',
 				transition: 'none',
-				center: false
+				center: true
 			}).then(() => {
-				slide_objectif.init(
-					document.getElementById("overview_input"),
-				 	document.getElementById("overview_output")
+				slide_squelettes.init(
+					document.getElementById("squelette_1D"),
+				 	document.getElementById("squelette_2D")
 				);
-				slide_objectif.open();
+
+				fragment_events["4_show"] = slides["Squelettes"].toggle_visible.bind(slides["Squelettes"]);
+				// slide_squelettes.open();
 			});
 
 			
