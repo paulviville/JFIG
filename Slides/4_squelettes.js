@@ -9,23 +9,7 @@ import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
-import {glRenderer} from './parameters.js';
-
-let ambiant_light_int = 0.4;
-let point_light_int = 0.6;
-
-// let glRenderer = new THREE.WebGLRenderer({
-// 	antialias: true,
-// 	alpha: true});
-
-let mesh_edge_color = new THREE.Color(0x333333);
-
-let mesh_edge_material = new THREE.LineBasicMaterial({
-	color: mesh_edge_color,
-	linewidth: 0.9,
-	polygonOffset: true,
-	polygonOffsetFactor: -0.5
-});
+import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
 export const slide_squelettes = new Slide(
 	function(DOM_Skel1D, DOM_Skel2D)
@@ -33,9 +17,7 @@ export const slide_squelettes = new Slide(
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Skel1D.width / DOM_Skel1D.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0.69, 0.39);
 		this.camera.lookAt(0, 0, 0);
-		let v = new THREE.Vector3(0, 0.8, 0.45);
-		v.normalize().multiplyScalar(0.8);
-		console.log(v)		
+		
 		const surface_layer = 0;
 		const mixte_layer = 1;
 		const curve_layer = 2;
@@ -47,8 +29,8 @@ export const slide_squelettes = new Slide(
 		const orbit_controls_output = new OrbitControls(this.camera, DOM_Skel2D);
 
 		this.scene = new THREE.Scene()
-		const ambiantLight = new THREE.AmbientLight(0xFFFFFF, ambiant_light_int);
-		const pointLight = new THREE.PointLight(0xFFFFFF, point_light_int);
+		const ambiantLight = new THREE.AmbientLight(0xFFFFFF, ambiantLightInt);
+		const pointLight = new THREE.PointLight(0xFFFFFF, pointLightInt);
 		pointLight.position.set(10,8,15);
 
 		ambiantLight.layers.enable(mixte_layer);
@@ -68,12 +50,12 @@ export const slide_squelettes = new Slide(
 
 		let holes_skel = loadIncidenceGraph('ig', Holes.holes_ig);
 		this.holes_skel = new Renderer(holes_skel);
-		this.holes_skel.edges.create({layer: mixte_layer, material: mesh_edge_material}).addTo(this.group);
+		this.holes_skel.edges.create({layer: mixte_layer, material: meshEdgeMaterial}).addTo(this.group);
 		this.holes_skel.faces.create({layer: mixte_layer, side: THREE.DoubleSide}).addTo(this.group);
 
 		let holes2_skel = loadIncidenceGraph('ig', Holes.holes2_ig);
 		this.holes2_skel = new Renderer(holes2_skel);
-		this.holes2_skel.edges.create({layer: curve_layer, material: mesh_edge_material}).addTo(this.group);
+		this.holes2_skel.edges.create({layer: curve_layer, material: meshEdgeMaterial}).addTo(this.group);
 
 
 		// this.holes_vol = Display.load_volumes_view("mesh", holes_mesh);
