@@ -31,6 +31,7 @@
 							}
 						}      
 						xhttp.open("GET", file, true);
+						console.log(file);
 						xhttp.send();
 						/*exit the function:*/
 						return;
@@ -49,10 +50,8 @@
 
 				
 				<!-- Intro -->
-				<section id="Brut" include-slide="./Slides/14_brut.html"></section>
 				<section id="Title" include-slide="./Slides/0_titre.html" data-visibility="uncounted"></section>
 				<section id="HexMesh" include-slide="./Slides/1_hexmesh.html"></section>
-				
 				<section id="Methodes" include-slide="./Slides/2_methodes.html"></section>
 				<section id="Algo1D" include-slide="./Slides/3_algo1D.html"></section>
 				<section id="Squelettes" include-slide="./Slides/4_squelettes.html"></section>
@@ -65,19 +64,20 @@
 				<section id="Geometry" include-slide="./Slides/11_propagation.html"></section>
 				<section id="Volumes" include-slide="./Slides/12_insertion.html"></section>
 				<section id="Coutures" include-slide="./Slides/13_coutures.html"></section>
-				<section id="Brut" include-slide="./Slides/14_brut.html"></section>
-				<section id="Result0" include-slide="./Slides/15_resultat.html"></section>
+				<section id="Brut"></section>
+				<section id="Result0"></section>
+				<!-- <section id="Brut" include-slide="./Slides/14_brut.html"></section> -->
+				<!-- <section id="Result0" include-slide="./Slides/15_resultat.html"></section> -->
 				<section id="Result1" include-slide="./Slides/16_resultats.html"></section>
 				<section id="Contributions" include-slide="./Slides/17_contributions.html"></section>
 				<section id="Limites" include-slide="./Slides/18_limites.html"></section>
 				<section id="Fin" include-slide="./Slides/19_fin.html"></section>
 
-				<!-- <section include-slide=""></section> -->
-				<!-- <section include-slide=""></section> -->
 				
 
 				<script>
 					includeHTML();
+
 				</script>
 			</div>	
 		</div>
@@ -91,12 +91,14 @@
 			import {slide_squelettes} from './Slides/4_squelettes.js';
 			import {slide_Algo1D} from './Slides/5_algo1D_steps.js';
 			import {slide_brut} from './Slides/14_brut.js';
-
+			import {slide_results0} from './Slides/15_resultats.js';
+			
 			slides["Titre"] = slide_titre;
 			slides["HexMesh"] = slide_hexmesh;
 			slides["Squelettes"] = slide_squelettes;
 			slides["Algo1DSteps"] = slide_Algo1D;
 			slides["Brut"] = slide_brut;
+			slides["Result0"] = slide_results0;
 
 			let active_slide;
 			Reveal.addEventListener('slidechanged', function(event) {
@@ -122,7 +124,7 @@
 				slideNumber: 'c/t',
 				transition: 'none',
 				center: true
-			}).then(() => {algo1D_0
+			}).then(() => {
 				slide_titre.init(
 					document.getElementById("title_hand0"),
 					document.getElementById("title_hand1"),
@@ -142,7 +144,7 @@
 				 	document.getElementById("squelette_2D")
 				);
 
-				fragment_events["4_show"] = slides["Squelettes"].toggle_visible.bind(slides["Squelettes"]);
+				// fragment_events["4_show"] = slides["Squelettes"].toggle_visible.bind(slides["Squelettes"]);
 
 				slide_Algo1D.init(
 					document.getElementById("algo1D_0"),
@@ -152,11 +154,12 @@
 					document.getElementById("algo1D_4")
 				);
 
-				slide_brut.init(
-					document.getElementById("brut_input"),
-				 	document.getElementById("brut_output")
-				);
-				slide_brut.open();
+				slide_brut.init("Brut");
+				slide_results0.init("Result0");
+				fragment_events["15_show"] = slides["Result0"].toggle_visible.bind(slides["Result0"]);
+				fragment_events["15_quality"] = slides["Result0"].toggle_material.bind(slides["Result0"]);
+				fragment_events["15_clipping"] = slides["Result0"].toggle_clipping.bind(slides["Result0"]);
+
 			});
 
 			

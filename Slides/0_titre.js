@@ -17,6 +17,12 @@ import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLi
 export const slide_titre = new Slide(
 	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4)
 	{
+		DOM_Hand0 = document.getElementById("title_hand0");
+		DOM_Hand1 = document.getElementById("title_hand1");
+		DOM_Hand2 = document.getElementById("title_hand2");
+		DOM_Hand3 = document.getElementById("title_hand3");
+		DOM_Hand4 = document.getElementById("title_hand4");
+
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Hand0.width / DOM_Hand0.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 1.4);
 		// this.camera.position.set(0, 0.69, 0.39);
@@ -36,6 +42,10 @@ export const slide_titre = new Slide(
 		const contextHand4 = DOM_Hand4.getContext('2d');
 
 		const controlsHand0 = new OrbitControls(this.camera, DOM_Hand0);
+		const controlsHand1 = new OrbitControls(this.camera, DOM_Hand1);
+		const controlsHand2 = new OrbitControls(this.camera, DOM_Hand2);
+		const controlsHand3 = new OrbitControls(this.camera, DOM_Hand3);
+		const controlsHand4 = new OrbitControls(this.camera, DOM_Hand4);
 
 		this.scene = new THREE.Scene()
 		const ambiantLight = new THREE.AmbientLight(0xFFFFFF, ambiantLightInt);
