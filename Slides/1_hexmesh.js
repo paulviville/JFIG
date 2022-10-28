@@ -11,32 +11,29 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
-export const slide_squelettes = new Slide(
-	function(DOM_Skel1D, DOM_Skel2D)
+
+export const slide_hexmesh = new Slide(
+	function(DOM_hexmesh)
 	{
-		this.camera = new THREE.PerspectiveCamera(75, DOM_Skel1D.width / DOM_Skel1D.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0.69, 0.39);
-		this.camera.lookAt(0, 0, 0);
+		this.camera = new THREE.PerspectiveCamera(75, DOM_hexmesh.width / DOM_hexmesh.height, 0.1, 1000.0);
+		this.camera.position.set(0, 0, 0.8);
 		
-		const surface_layer = 0;
-		const mixte_layer = 1;
-		const curve_layer = 2;
+		const surfaceLayer = 0;
+		const meshLayer = 1;
 
-		const context_input = DOM_Skel1D.getContext('2d');
-		const context_output = DOM_Skel2D.getContext('2d');
+		const contextInput = DOM_hexmesh.getContext('2d');
 
-		const orbit_controls_input = new OrbitControls(this.camera, DOM_Skel1D);
-		const orbit_controls_output = new OrbitControls(this.camera, DOM_Skel2D);
+		const orbitControlsInput = new OrbitControls(this.camera, DOM_hexmesh);
 
 		this.scene = new THREE.Scene()
 		const ambiantLight = new THREE.AmbientLight(0xFFFFFF, ambiantLightInt);
 		const pointLight = new THREE.PointLight(0xFFFFFF, pointLightInt);
 		pointLight.position.set(10,8,15);
 
-		ambiantLight.layers.enable(mixte_layer);
-		pointLight.layers.enable(mixte_layer);
-		ambiantLight.layers.enable(curve_layer);
-		pointLight.layers.enable(curve_layer);
+		ambiantLight.layers.enable(surfaceLayer);
+		pointLight.layers.enable(surfaceLayer);
+		ambiantLight.layers.enable(meshLayer);
+		pointLight.layers.enable(meshLayer);
 
 		this.scene.add(pointLight);
 		this.scene.add(ambiantLight);
@@ -44,71 +41,60 @@ export const slide_squelettes = new Slide(
 		this.group = new THREE.Group;
 		this.scene.add(this.group);
 
-		this.holes_surface = Display.loadSurfaceView("off", Holes.holes_off, {transparent: true, opacity: 0.1});
-		this.holes_surface.layers.set(surface_layer);
-		this.group.add(this.holes_surface);
+		this.holesSurface = Display.loadSurfaceView("off", Holes.holes_off, {transparent: true, opacity: 0.1});
+		this.holesSurface.layers.set(surfaceLayer);
+		this.group.add(this.holesSurface);
 
-		let holes_skel = loadIncidenceGraph('ig', Holes.holes_ig);
-		this.holes_skel = new Renderer(holes_skel);
-		this.holes_skel.edges.create({layer: mixte_layer, material: meshEdgeMaterial}).addTo(this.group);
-		this.holes_skel.faces.create({layer: mixte_layer, side: THREE.DoubleSide}).addTo(this.group);
-
-		let holes2_skel = loadIncidenceGraph('ig', Holes.holes2_ig);
-		this.holes2_skel = new Renderer(holes2_skel);
-		this.holes2_skel.edges.create({layer: curve_layer, material: meshEdgeMaterial}).addTo(this.group);
+		this.holesVol = Display.loadVolumesView("mesh", Holes.holes_mesh);
+		this.holesVol.layers.set(meshLayer);
+		this.group.add(this.holesVol);
 
 
-		// this.holes_vol = Display.load_volumes_view("mesh", holes_mesh);
-		this.holes_vol = Display.loadVolumesView("mesh", Holes.holes_mesh);
-		this.holes_vol.layers.set(mixte_layer);
-		this.group.add(this.holes_vol);
-
-		this.holes2_vol = Display.loadVolumesView("mesh", Holes.holes2_mesh);
-		this.holes2_vol.layers.set(curve_layer);
-		this.group.add(this.holes2_vol);
-
-		const axis = new THREE.Vector3(0, 0.5, -0.9);
+		const axis = new THREE.Vector3(0, 1, 0);
 		this.clock = new Clock(true);
 		this.time = 0;
 		
-		this.toggle_clipping = function(){
-			this.holes_vol.material.uniforms.clipping.value = 1 - this.holes_vol.material.uniforms.clipping.value;
+		this.toggleClipping = function(){
+			this.holesVol.material.uniforms.clipping.value = 1 - this.holesVol.material.uniforms.clipping.value;
 		};
 
-		this.toggle_visible = function(){
-			this.holes_vol.visible = !this.holes_vol.visible;
-			this.holes2_vol.visible = !this.holes2_vol.visible;
+		this.toggleVisible = function(){
+			this.holesVol.visible = !this.holesVol.visible;
 		};
-
-		this.toggle_visible();
 
 		this.on = 1;
 		this.pause = function(){
 			this.on = 1 - this.on;
 		};
 
+		const offsetAngle = Math.PI / 2.4;
+		const offsetAxis = new THREE.Vector3(1, 0, 0);
+		this.holesSurface.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holesVol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+
+
 		this.loop = function(){
 			if(this.running){
+				glRenderer.setSize(DOM_hexmesh.width, DOM_hexmesh.height);
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 5 * this.time);
 
-				this.holes_surface.material.opacity = 0.5;
-				this.holes_surface.material.side = THREE.FrontSide;
-				this.camera.layers.enable(curve_layer);
-				glRenderer.setSize(DOM_Skel1D.width, DOM_Skel1D.height);
+				this.camera.layers.enable(surfaceLayer);
+				this.camera.layers.enable(meshLayer);
 				glRenderer.render(this.scene, this.camera);
-				context_input.clearRect(0, 0, DOM_Skel1D.width, DOM_Skel1D.height);
-				context_input.drawImage(glRenderer.domElement, 0, 0)
-				this.camera.layers.disable(curve_layer);
+				contextInput.clearRect(0, 0, DOM_hexmesh.width, DOM_hexmesh.height);
+				contextInput.drawImage(glRenderer.domElement, 0, 0)
+				this.camera.layers.disable(surfaceLayer);
+				this.camera.layers.disable(meshLayer);
 
-				this.holes_surface.material.opacity = 0.3;
-				this.holes_surface.material.side = THREE.BackSide;
+				// this.holes_surface.material.opacity = 0.3;
+				// this.holes_surface.material.side = THREE.BackSide;
 
-				this.camera.layers.enable(mixte_layer);
-				glRenderer.render(this.scene, this.camera);
-				context_output.clearRect(0, 0, DOM_Skel2D.width, DOM_Skel2D.height);
-				context_output.drawImage(glRenderer.domElement, 0, 0);
-				this.camera.layers.disable(mixte_layer);
+				// this.camera.layers.enable(mixte_layer);
+				// glRenderer.render(this.scene, this.camera);
+				// context_output.clearRect(0, 0, DOM_Skel2D.width, DOM_Skel2D.height);
+				// context_output.drawImage(glRenderer.domElement, 0, 0);
+				// this.camera.layers.disable(mixte_layer);
 
 				requestAnimationFrame(this.loop.bind(this));
 			}

@@ -11,12 +11,13 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
+
 export const slide_squelettes = new Slide(
 	function(DOM_Skel1D, DOM_Skel2D)
 	{
+		// console.toholesVolumes;
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Skel1D.width / DOM_Skel1D.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0.69, 0.39);
-		this.camera.lookAt(0, 0, 0);
+		this.camera.position.set(0, 0, 0.8);
 		
 		const surface_layer = 0;
 		const mixte_layer = 1;
@@ -48,12 +49,12 @@ export const slide_squelettes = new Slide(
 		this.holes_surface.layers.set(surface_layer);
 		this.group.add(this.holes_surface);
 
-		let holes_skel = loadIncidenceGraph('ig', Holes.holes_ig);
+		const holes_skel = loadIncidenceGraph('ig', Holes.holes_ig);
 		this.holes_skel = new Renderer(holes_skel);
 		this.holes_skel.edges.create({layer: mixte_layer, material: meshEdgeMaterial}).addTo(this.group);
 		this.holes_skel.faces.create({layer: mixte_layer, side: THREE.DoubleSide}).addTo(this.group);
 
-		let holes2_skel = loadIncidenceGraph('ig', Holes.holes2_ig);
+		const holes2_skel = loadIncidenceGraph('ig', Holes.holes2_ig);
 		this.holes2_skel = new Renderer(holes2_skel);
 		this.holes2_skel.edges.create({layer: curve_layer, material: meshEdgeMaterial}).addTo(this.group);
 
@@ -67,7 +68,7 @@ export const slide_squelettes = new Slide(
 		this.holes2_vol.layers.set(curve_layer);
 		this.group.add(this.holes2_vol);
 
-		const axis = new THREE.Vector3(0, 0.5, -0.9);
+		const axis = new THREE.Vector3(0, 1, 0);
 		this.clock = new Clock(true);
 		this.time = 0;
 		
@@ -86,6 +87,15 @@ export const slide_squelettes = new Slide(
 		this.pause = function(){
 			this.on = 1 - this.on;
 		};
+
+		const offsetAngle = Math.PI / 2.4;
+		const offsetAxis = new THREE.Vector3(1, 0, 0);
+		this.holes_surface.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holes_vol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holes2_vol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holes_skel.edges.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holes2_skel.edges.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
+		this.holes_skel.faces.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
 
 		this.loop = function(){
 			if(this.running){
