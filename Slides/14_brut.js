@@ -12,32 +12,11 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
-export const html14 = `<div id="Squelettes">
-	Maillage Brut
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
-	<div class="r-hstack"> 
-		<div class="r-frame">
-			<canvas id="brut_input" width="400" height="400"></canvas>
-			<p style="font-size:25px; margin-top: 0px;">Surface et squelette</p>
-		</div>
-		<img src="Images/Utils/arrow.png" height="80px" style="padding-right: 1%; padding-left: 1%;">
-		<div class="r-frame">
-			<canvas id="brut_output" width="400" height="400"></canvas>
-			<p style="font-size:25px; margin-top: 0px;">Maillage brut</p>
-		</div>
-	</div>
 
-	<aside class="notes">
-	</aside>
-</div>`
 
 export const slide_brut = new Slide(
-	function(section)
+	function(DOM_Input, DOM_Output)
 	{
-		document.getElementById(section).innerHTML = html14;
-		const DOM_Input = document.getElementById("brut_input");
-		const DOM_Output = document.getElementById("brut_output");
-
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Input.width / DOM_Input.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 0.7);
 		

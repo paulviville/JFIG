@@ -50,35 +50,26 @@
 
 				
 				<!-- Intro -->
-				<section id="Title" include-slide="./Slides/0_titre.html" data-visibility="uncounted"></section>
-				<section id="HexMesh" include-slide="./Slides/1_hexmesh.html"></section>
-				<section id="Methodes" include-slide="./Slides/2_methodes.html"></section>
-				<section id="Algo1D" include-slide="./Slides/3_algo1D.html"></section>
-				<section id="Squelettes" include-slide="./Slides/4_squelettes.html"></section>
-				<section id="Algo1DSteps" include-slide="./Slides/5_algo1D_steps.html"></section>
-				<section id="Blocs" include-slide="./Slides/6_construction_blocs.html"></section>
-				<section id="Adaptation" include-slide="./Slides/7_adaptation.html"></section>
-				<section id="Analyse" include-slide="./Slides/8_analyse.html"></section>
-				<section id="Echaf0" include-slide="./Slides/9_echafaudage.html"></section>
-				<section id="Echaf1" include-slide="./Slides/10_echafaudage.html"></section>
-				<section id="Geometry" include-slide="./Slides/11_propagation.html"></section>
-				<section id="Volumes" include-slide="./Slides/12_insertion.html"></section>
-				<section id="Coutures" include-slide="./Slides/13_coutures.html"></section>
+				<section id="Title"data-visibility="uncounted"></section>
+				<section id="HexMesh"></section>
+				<section id="Methodes"></section>
+				<section id="Algo1D"></section>
+				<section id="Squelettes"></section>
+				<section id="Algo1DSteps"></section>
+				<section id="Blocs"></section>
+				<section id="Adaptation"></section>
+				<section id="Analyse"></section>
+				<section id="Echaf0"></section>
+				<section id="Echaf1"></section>
+				<section id="Geometry"></section>
+				<section id="Volumes"></section>
+				<section id="Coutures"></section>
 				<section id="Brut"></section>
 				<section id="Result0"></section>
-				<!-- <section id="Brut" include-slide="./Slides/14_brut.html"></section> -->
-				<!-- <section id="Result0" include-slide="./Slides/15_resultat.html"></section> -->
-				<section id="Result1" include-slide="./Slides/16_resultats.html"></section>
+				<section id="Result1"></section>
 				<section id="Contributions" include-slide="./Slides/17_contributions.html"></section>
 				<section id="Limites" include-slide="./Slides/18_limites.html"></section>
 				<section id="Fin" include-slide="./Slides/19_fin.html"></section>
-
-				
-
-				<script>
-					includeHTML();
-
-				</script>
 			</div>	
 		</div>
 
@@ -92,6 +83,7 @@
 			import {slide_Algo1D} from './Slides/5_algo1D_steps.js';
 			import {slide_brut} from './Slides/14_brut.js';
 			import {slide_results0} from './Slides/15_resultats.js';
+			import {slide_results1} from './Slides/16_resultats.js';
 			
 			slides["Titre"] = slide_titre;
 			slides["HexMesh"] = slide_hexmesh;
@@ -99,6 +91,7 @@
 			slides["Algo1DSteps"] = slide_Algo1D;
 			slides["Brut"] = slide_brut;
 			slides["Result0"] = slide_results0;
+			slides["Result1"] = slide_results1;
 
 			let active_slide;
 			Reveal.addEventListener('slidechanged', function(event) {
@@ -118,6 +111,21 @@
 					fragment_events[event.fragment.id]();
 			});
 
+			function loadFile(url, div) {
+				const xhttp = new XMLHttpRequest();
+				let text;
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4) {
+						if (this.status == 200) {div.innerHTML = this.responseText;}
+					}
+				}      
+				xhttp.open("GET", url, false);
+				xhttp.send();
+			}
+
+			async function loadSlideHtml(slideID, path){
+				await loadFile(path, document.getElementById(slideID));
+			}
 
 			Reveal.initialize({
 				touch: false, 
@@ -125,41 +133,94 @@
 				transition: 'none',
 				center: true
 			}).then(() => {
-				slide_titre.init(
-					document.getElementById("title_hand0"),
-					document.getElementById("title_hand1"),
-					document.getElementById("title_hand2"),
-					document.getElementById("title_hand3"),
-					document.getElementById("title_hand4")
-				);
-				slide_titre.open();
 
-				slide_hexmesh.init(
-					document.getElementById("hexmesh_holes")
-				);
-				fragment_events["1_clipping"] = slides["HexMesh"].toggleClipping.bind(slides["HexMesh"]);
+				loadSlideHtml("Title", "./Slides/0_titre.html").then(() => {
+					slide_titre.init(
+						document.getElementById("title_hand0"),
+						document.getElementById("title_hand1"),
+						document.getElementById("title_hand2"),
+						document.getElementById("title_hand3"),
+						document.getElementById("title_hand4")
+					);
+					slide_titre.open();
+					Reveal.slide(0);
+				});
 
-				slide_squelettes.init(
-					document.getElementById("squelette_1D"),
-				 	document.getElementById("squelette_2D")
-				);
 
-				// fragment_events["4_show"] = slides["Squelettes"].toggle_visible.bind(slides["Squelettes"]);
+				loadSlideHtml("HexMesh", "./Slides/1_hexmesh.html").then(() => {
+					slide_hexmesh.init(
+						document.getElementById("hexmesh_holes")
+					);
+					fragment_events["1_clipping"] = slides["HexMesh"].toggleClipping.bind(slides["HexMesh"]);
+				});
 
-				slide_Algo1D.init(
-					document.getElementById("algo1D_0"),
-					document.getElementById("algo1D_1"),
-					document.getElementById("algo1D_2"),
-					document.getElementById("algo1D_3"),
-					document.getElementById("algo1D_4")
-				);
+				loadSlideHtml("Methodes", "./Slides/2_methodes.html");
+				loadSlideHtml("Algo1D", "./Slides/3_algo1D.html");
 
-				slide_brut.init("Brut");
-				slide_results0.init("Result0");
-				fragment_events["15_show"] = slides["Result0"].toggle_visible.bind(slides["Result0"]);
-				fragment_events["15_quality"] = slides["Result0"].toggle_material.bind(slides["Result0"]);
-				fragment_events["15_clipping"] = slides["Result0"].toggle_clipping.bind(slides["Result0"]);
+				loadSlideHtml("Squelettes", "./Slides/4_squelettes.html").then(() => { 
+					slide_squelettes.init(
+						document.getElementById("squelette_1D"),
+						document.getElementById("squelette_2D")
+					);
+				});
 
+				loadSlideHtml("Algo1DSteps", "./Slides/5_algo1D_steps.html").then(() => { 
+					slide_Algo1D.init(
+						document.getElementById("algo1D_0"),
+						document.getElementById("algo1D_1"),
+						document.getElementById("algo1D_2"),
+						document.getElementById("algo1D_3"),
+						document.getElementById("algo1D_4")
+					);
+				});
+
+				loadSlideHtml("Blocs", "./Slides/6_construction_blocs.html");
+				loadSlideHtml("Adaptation", "./Slides/7_adaptation.html");
+				loadSlideHtml("Analyse", "./Slides/8_analyse.html");
+
+				loadSlideHtml("Echaf0", "./Slides/9_echafaudage.html");
+				loadSlideHtml("Echaf1", "./Slides/10_echafaudage.html");
+				loadSlideHtml("Geometry", "./Slides/11_propagation.html");
+				loadSlideHtml("Volumes", "./Slides/12_insertion.html");
+				loadSlideHtml("Coutures", "./Slides/13_coutures.html");
+
+				loadSlideHtml("Brut", "./Slides/14_brut.html").then(() => { 
+					slide_brut.init(
+						document.getElementById("brut_input"),
+						document.getElementById("brut_output")
+					);
+				});
+
+				loadSlideHtml("Result0", "./Slides/15_resultat.html").then(() => { 
+					slide_results0.init(
+						document.getElementById("result_holes0"),
+						document.getElementById("result_holes1")
+					);
+
+					fragment_events["15_show"] = slides["Result0"].toggle_visible.bind(slides["Result0"]);
+					fragment_events["15_quality"] = slides["Result0"].toggle_material.bind(slides["Result0"]);
+					fragment_events["15_clipping"] = slides["Result0"].toggle_clipping.bind(slides["Result0"]);
+
+				});
+
+				loadSlideHtml("Result1", "./Slides/16_resultats.html").then(() => { 
+					slide_results1.init(
+						document.getElementById("result_dilo"),
+						document.getElementById("result_hand")
+					);
+
+					fragment_events["16_show"] = slides["Result1"].toggle_visible.bind(slides["Result1"]);
+					fragment_events["16_quality"] = slides["Result1"].toggle_material.bind(slides["Result1"]);
+					fragment_events["16_clipping"] = slides["Result1"].toggle_clipping.bind(slides["Result1"]);
+
+					// Reveal.slide(16);
+				});
+				// loadSlideHtml(slideID, path).then(() => { });
+				
+
+
+				
+				
 			});
 
 			

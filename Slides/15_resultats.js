@@ -12,34 +12,10 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
-export const html = `<div id="Squelettes">
-Résultats
-<hr style="width: 70%; display:flex; justify-content:space-evenly;">
-<div class="r-hstack"> 
-	<div class="r-frame" style="margin-right: 5%">
-		<canvas id="result_holes0" width="220" height="400"></canvas>
-		<p style="font-size:25px; margin-top: 0px;">SJ: 0.55/0.91 (min/moy)<br>2304 hex</p>
-	</div>
-	<div class="r-frame">
-		<canvas id="result_holes1" width="220" height="400"></canvas>
-		<p style="font-size:25px; margin-top: 0px;">SJ: 0.70/0.94 (min/moy)<br>2432 hex</p>
-	</div>
-</div>
-<div class="fragment" id="15_show"></div>
-<div class="fragment" id="15_quality"></div>
-<div class="fragment" id="15_clipping"></div>
-
-<aside class="notes">
-</aside>
-</div>`
 
 export const slide_results0 = new Slide(
-	function(section)
+	function(DOM_Input, DOM_Output)
 	{
-		document.getElementById(section).innerHTML = html;
-		const DOM_Input = document.getElementById("result_holes0");
-		const DOM_Output = document.getElementById("result_holes1");
-
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Input.width / DOM_Input.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 0.8);
 		
