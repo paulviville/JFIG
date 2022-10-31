@@ -88,8 +88,6 @@ export const slide_brut = new Slide(
 		this.metatronSkel.faces.mesh.position.set(0,0,offset);
 		this.metatronVol.scale.set(scale,scale,scale);
 		this.metatronVol.position.set(0,0,offset);
-		this.metatronVol.geometry.computeBoundingBox()
-		this.metatronVol.geometry.computeBoundingSphere()
 
 		this.loop = function(){
 			if(this.running){

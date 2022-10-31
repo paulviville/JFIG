@@ -77,7 +77,7 @@ export const slide_hexmesh = new Slide(
 			if(this.running){
 				glRenderer.setSize(DOM_hexmesh.width, DOM_hexmesh.height);
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 5 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 15 * this.time);
 
 				this.camera.layers.enable(surfaceLayer);
 				this.camera.layers.enable(meshLayer);

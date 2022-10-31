@@ -18,7 +18,7 @@ export const slide_results1 = new Slide(
 	{
 		this.camera0 = new THREE.PerspectiveCamera(75, DOM_Dilo.width / DOM_Dilo.height, 0.1, 1000.0);
 		this.camera0.position.set(0, 0, 0.8);
-		this.camera1 = new THREE.PerspectiveCamera(75, DOM_Dilo.width / DOM_Dilo.height, 0.1, 1000.0);
+		this.camera1 = new THREE.PerspectiveCamera(75, DOM_Hand.width / DOM_Hand.height, 0.1, 1000.0);
 		this.camera1.position.set(0, 0, 1.4);
 		
 		const handLayer = 1;
@@ -138,11 +138,12 @@ export const slide_results1 = new Slide(
 				context_input.drawImage(glRenderer.domElement, 0, 0)
 				this.camera0.layers.disable(diloLayer);
 
-				this.dilo_surface.material.opacity = 0.3;
+				// this.dilo_surface.material.opacity = 0.3;
 				this.dilo_surface.material.side = THREE.BackSide;
 				this.hand_surface.material.side = THREE.BackSide;
 
 				this.camera1.layers.enable(handLayer);
+				glRenderer.setSize(DOM_Hand.width, DOM_Hand.height);
 				glRenderer.render(this.scene, this.camera1);
 				context_output.clearRect(0, 0, DOM_Hand.width, DOM_Hand.height);
 				context_output.drawImage(glRenderer.domElement, 0, 0);

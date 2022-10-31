@@ -9,47 +9,8 @@
 	</head>
 
 	<body>
-		<script>
-			function includeHTML() {
-				var z, i, elmnt, file, xhttp;
-				/*loop through a collection of all HTML elements:*/
-				z = document.getElementsByTagName("*");
-				for (i = 0; i < z.length; i++) {
-					elmnt = z[i];
-					/*search for elements with a certain atrribute:*/
-					file = elmnt.getAttribute("include-slide");
-					if (file) {
-						/*make an HTTP request using the attribute value as the file name:*/
-						xhttp = new XMLHttpRequest();
-						xhttp.onreadystatechange = function() {
-							if (this.readyState == 4) {
-								if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-								if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-								/*remove the attribute, and call this function once more:*/
-								elmnt.removeAttribute("include-slide");
-								includeHTML();
-							}
-						}      
-						xhttp.open("GET", file, true);
-						console.log(file);
-						xhttp.send();
-						/*exit the function:*/
-						return;
-					}
-				}
-			};
-		</script>
-
-		<script type="module">
-			const slides = new Array();
-		</script>
-		<!-- <div id="stats"></div> -->
-		
 		<div class="reveal">
 			<div class="slides" id="slides">
-
-				
-				<!-- Intro -->
 				<section id="Title"data-visibility="uncounted"></section>
 				<section id="HexMesh"></section>
 				<section id="Methodes"></section>
@@ -67,9 +28,9 @@
 				<section id="Brut"></section>
 				<section id="Result0"></section>
 				<section id="Result1"></section>
-				<section id="Contributions" include-slide="./Slides/17_contributions.html"></section>
-				<section id="Limites" include-slide="./Slides/18_limites.html"></section>
-				<section id="Fin" include-slide="./Slides/19_fin.html"></section>
+				<section id="Contributions"></section>
+				<section id="Limites"></section>
+				<section id="Fin"></section>
 			</div>	
 		</div>
 
@@ -84,7 +45,11 @@
 			import {slide_brut} from './Slides/14_brut.js';
 			import {slide_results0} from './Slides/15_resultats.js';
 			import {slide_results1} from './Slides/16_resultats.js';
+			import {slide_contributions} from './Slides/17_contributions.js';
+			import {slide_fin} from './Slides/19_fin.js';
 			
+			const slides = new Array();
+
 			slides["Titre"] = slide_titre;
 			slides["HexMesh"] = slide_hexmesh;
 			slides["Squelettes"] = slide_squelettes;
@@ -92,6 +57,8 @@
 			slides["Brut"] = slide_brut;
 			slides["Result0"] = slide_results0;
 			slides["Result1"] = slide_results1;
+			slides["Contributions"] = slide_contributions;
+			slides["Fin"] = slide_fin;
 
 			let active_slide;
 			Reveal.addEventListener('slidechanged', function(event) {
@@ -217,10 +184,20 @@
 				});
 				// loadSlideHtml(slideID, path).then(() => { });
 				
+				loadSlideHtml("Contributions", "./Slides/17_contributions.html").then(() => {
+					slide_contributions.init(
+						document.getElementById("metatron_mesh")
+					);
+				});
 
+				loadSlideHtml("Limites", "./Slides/18_limites.html");
+				
+				loadSlideHtml("Fin", "./Slides/19_fin.html").then(() => {
+					slide_fin.init(
+						document.getElementById("metatron_end")
+					);
+				});
 
-				
-				
 			});
 
 			
