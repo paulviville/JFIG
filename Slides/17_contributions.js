@@ -83,12 +83,6 @@ export const slide_contributions = new Slide(
 			this.on = 1 - this.on;
 		};
 
-		// const offsetAngle = Math.PI / 2.4;
-		// const offsetAxis = new THREE.Vector3(1, 0, 0);
-		// this.metatronSurface.setRotationFromAxisAngle(offsetAxis, offsetAngle);
-		// this.metatronVol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
-
-
 		this.loop = function(){
 			if(this.running){
 				glRenderer.setSize(DOM_hexmesh.width, DOM_hexmesh.height);
@@ -102,15 +96,6 @@ export const slide_contributions = new Slide(
 				contextInput.drawImage(glRenderer.domElement, 0, 0)
 				this.camera.layers.disable(surfaceLayer);
 				this.camera.layers.disable(meshLayer);
-
-				// this.metatron_surface.material.opacity = 0.3;
-				// this.metatron_surface.material.side = THREE.BackSide;
-
-				// this.camera.layers.enable(mixte_layer);
-				// glRenderer.render(this.scene, this.camera);
-				// context_output.clearRect(0, 0, DOM_Skel2D.width, DOM_Skel2D.height);
-				// context_output.drawImage(glRenderer.domElement, 0, 0);
-				// this.camera.layers.disable(mixte_layer);
 
 				requestAnimationFrame(this.loop.bind(this));
 			}

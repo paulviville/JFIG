@@ -5,11 +5,10 @@ import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from '../CMapJS/Utils/Display.js';
 import * as Holes from '../Files/holes_files.js';
-import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
-import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
+import {glRenderer, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
 
 export const slide_squelettes = new Slide(
@@ -58,16 +57,6 @@ export const slide_squelettes = new Slide(
 		this.holes2_skel = new Renderer(holes2_skel);
 		this.holes2_skel.edges.create({layer: curve_layer, material: meshEdgeMaterial}).addTo(this.group);
 
-
-		// this.holes_vol = Display.load_volumes_view("mesh", holes_mesh);
-		// this.holes_vol = Display.loadVolumesView("mesh", Holes.holes_mesh);
-		// this.holes_vol.layers.set(mixte_layer);
-		// this.group.add(this.holes_vol);
-
-		// this.holes2_vol = Display.loadVolumesView("mesh", Holes.holes2_mesh);
-		// this.holes2_vol.layers.set(curve_layer);
-		// this.group.add(this.holes2_vol);
-
 		const axis = new THREE.Vector3(0, 1, 0);
 		this.clock = new Clock(true);
 		this.time = 0;
@@ -75,13 +64,6 @@ export const slide_squelettes = new Slide(
 		this.toggle_clipping = function(){
 			this.holes_vol.material.uniforms.clipping.value = 1 - this.holes_vol.material.uniforms.clipping.value;
 		};
-
-		// this.toggle_visible = function(){
-		// 	this.holes_vol.visible = !this.holes_vol.visible;
-		// 	this.holes2_vol.visible = !this.holes2_vol.visible;
-		// };
-
-		// this.toggle_visible();
 
 		this.on = 1;
 		this.pause = function(){
@@ -91,8 +73,6 @@ export const slide_squelettes = new Slide(
 		const offsetAngle = Math.PI / 2.4;
 		const offsetAxis = new THREE.Vector3(1, 0, 0);
 		this.holes_surface.setRotationFromAxisAngle(offsetAxis, offsetAngle);
-		// this.holes_vol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
-		// this.holes2_vol.setRotationFromAxisAngle(offsetAxis, offsetAngle);
 		this.holes_skel.edges.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
 		this.holes2_skel.edges.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
 		this.holes_skel.faces.mesh.setRotationFromAxisAngle(offsetAxis, offsetAngle);
@@ -110,9 +90,6 @@ export const slide_squelettes = new Slide(
 				context_input.clearRect(0, 0, DOM_Skel1D.width, DOM_Skel1D.height);
 				context_input.drawImage(glRenderer.domElement, 0, 0)
 				this.camera.layers.disable(curve_layer);
-
-				// this.holes_surface.material.opacity = 0.5;
-				// this.holes_surface.material.side = THREE.BackSide;
 
 				this.camera.layers.enable(mixte_layer);
 				glRenderer.render(this.scene, this.camera);
