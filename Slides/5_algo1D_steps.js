@@ -4,10 +4,8 @@ import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from '../CMapJS/Utils/Display.js';
-import * as Hand from '../Files/hand_files.js';
 import * as Cactus from '../Files/cactus_files.js';
 import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
-import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {loadCMap2} from '../CMapJS/IO/SurfaceFormats/CMap2IO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
@@ -20,8 +18,6 @@ export const slide_Algo1D = new Slide(
 	{
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Cactus0.width / DOM_Cactus0.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 0.65);
-		// this.camera.position.set(0, 0.69, 0.39);
-		// this.camera.lookAt(0, 0, 0);
 
 		const surfaceLayer = 0;
 		const skelLayer = 1;
@@ -83,12 +79,9 @@ export const slide_Algo1D = new Slide(
 		this.cactusScaf = new Renderer(cactusScaf);
 		this.cactusScaf.edges.create({layer: scafLayer, material: scafEdgeMaterial, size: 2.5}).addTo(this.group);
 
-
-		// this.handVol = Display.load_volumes_view("mesh", holes_mesh);
 		this.cactusRawVol = Display.loadVolumesView("mesh", Cactus.cactus0_mesh);
 		this.cactusRawVol.layers.set(rawLayer);
 		this.group.add(this.cactusRawVol);
-
 
 		this.cactusMesh = Display.loadVolumesView("mesh", Cactus.cactus_mesh);
 		this.cactusMesh.layers.set(meshLayer);

@@ -58,8 +58,6 @@ export const slide_results0 = new Slide(
 		this.holes2_skel = new Renderer(holes2_skel);
 		this.holes2_skel.edges.create({layer: curve_layer, material: meshEdgeMaterial}).addTo(this.group);
 
-
-		// this.holes_vol = Display.load_volumes_view("mesh", holes_mesh);
 		this.holes_vol = Display.loadVolumesView("mesh", Holes.holes_mesh);
 		this.holes_vol.layers.set(mixte_layer);
 		this.group.add(this.holes_vol);
@@ -80,7 +78,6 @@ export const slide_results0 = new Slide(
 		this.toggle_visible = function(){
 			this.holes_vol.visible = !this.holes_vol.visible;
 			this.holes2_vol.visible = !this.holes2_vol.visible;
-			// this.holes_surface.visible = !this.holes_surface.visible;
 			this.holes_skel.edges.mesh.visible = !this.holes_skel.edges.mesh.visible;
 			this.holes2_skel.edges.mesh.visible = !this.holes2_skel.edges.mesh.visible;
 			this.holes_skel.faces.mesh.visible = !this.holes_skel.faces.mesh.visible;
@@ -108,7 +105,6 @@ export const slide_results0 = new Slide(
 
 		this.holes_vol.visible = false ;
 		this.holes2_vol.visible = false;
-		// this.holes_surface.visible = true;
 		this.holes_skel.edges.mesh.visible = true;
 		this.holes2_skel.edges.mesh.visible = true;
 		this.holes_skel.faces.mesh.visible = true;
@@ -118,8 +114,6 @@ export const slide_results0 = new Slide(
 				this.time += this.clock.getDelta() * this.on;
 				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
 
-				// this.holes_surface.material.opacity = 0.5;
-				// this.holes_surface.material.side = THREE.FrontSide;
 				this.camera.layers.enable(curve_layer);
 				glRenderer.setSize(DOM_Input.width, DOM_Input.height);
 				glRenderer.render(this.scene, this.camera);

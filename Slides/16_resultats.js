@@ -123,24 +123,20 @@ export const slide_results1 = new Slide(
 		this.hand_skel.edges.mesh.visible = true;
 		this.dilo_skel.edges.mesh.visible = true;
 		this.hand_skel.faces.mesh.visible = true;
+		this.dilo_surface.material.side = THREE.BackSide;
+		this.hand_surface.material.side = THREE.BackSide;
 
 		this.loop = function(){
 			if(this.running){
 				this.time += this.clock.getDelta() * this.on;
 				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
 
-				// this.dilo_surface.material.opacity = 0.5;
-				// this.dilo_surface.material.side = THREE.FrontSide;
 				this.camera0.layers.enable(diloLayer);
 				glRenderer.setSize(DOM_Dilo.width, DOM_Dilo.height);
 				glRenderer.render(this.scene, this.camera0);
 				context_input.clearRect(0, 0, DOM_Dilo.width, DOM_Dilo.height);
 				context_input.drawImage(glRenderer.domElement, 0, 0)
 				this.camera0.layers.disable(diloLayer);
-
-				// this.dilo_surface.material.opacity = 0.3;
-				this.dilo_surface.material.side = THREE.BackSide;
-				this.hand_surface.material.side = THREE.BackSide;
 
 				this.camera1.layers.enable(handLayer);
 				glRenderer.setSize(DOM_Hand.width, DOM_Hand.height);

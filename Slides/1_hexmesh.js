@@ -2,14 +2,11 @@ import Slide from './Slide.js';
 
 import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
-import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from '../CMapJS/Utils/Display.js';
 import * as Holes from '../Files/holes_files.js';
-import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
-import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
-import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
+import {glRenderer, ambiantLightInt, pointLightInt} from './parameters.js';
 
 
 export const slide_hexmesh = new Slide(
@@ -86,15 +83,6 @@ export const slide_hexmesh = new Slide(
 				contextInput.drawImage(glRenderer.domElement, 0, 0)
 				this.camera.layers.disable(surfaceLayer);
 				this.camera.layers.disable(meshLayer);
-
-				// this.holes_surface.material.opacity = 0.3;
-				// this.holes_surface.material.side = THREE.BackSide;
-
-				// this.camera.layers.enable(mixte_layer);
-				// glRenderer.render(this.scene, this.camera);
-				// context_output.clearRect(0, 0, DOM_Skel2D.width, DOM_Skel2D.height);
-				// context_output.drawImage(glRenderer.domElement, 0, 0);
-				// this.camera.layers.disable(mixte_layer);
 
 				requestAnimationFrame(this.loop.bind(this));
 			}

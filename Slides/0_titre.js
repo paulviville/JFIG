@@ -5,7 +5,6 @@ import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from '../CMapJS/Utils/Display.js';
 import * as Hand from '../Files/hand_files.js';
-import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {loadCMap2} from '../CMapJS/IO/SurfaceFormats/CMap2IO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
@@ -17,16 +16,8 @@ import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLi
 export const slide_titre = new Slide(
 	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4)
 	{
-		DOM_Hand0 = document.getElementById("title_hand0");
-		DOM_Hand1 = document.getElementById("title_hand1");
-		DOM_Hand2 = document.getElementById("title_hand2");
-		DOM_Hand3 = document.getElementById("title_hand3");
-		DOM_Hand4 = document.getElementById("title_hand4");
-
 		this.camera = new THREE.PerspectiveCamera(75, DOM_Hand0.width / DOM_Hand0.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 1.4);
-		// this.camera.position.set(0, 0.69, 0.39);
-		// this.camera.lookAt(0, 0, 0);
 
 		const surfaceLayer = 0;
 		const skelLayer = 1;
@@ -69,33 +60,33 @@ export const slide_titre = new Slide(
 		this.group = new THREE.Group;
 		this.scene.add(this.group);
 
+		const handGroup = new THREE.Group;
+		this.group.add(handGroup);
 		this.handSurface = Display.loadSurfaceView("off", Hand.hand_off, {transparent: true, opacity: 0.3});
 		this.handSurface.layers.set(surfaceLayer);
-		this.group.add(this.handSurface);
+		handGroup.add(this.handSurface);
 
 		const handSkel = loadIncidenceGraph('ig', Hand.hand2D_ig);
 		this.handSkel = new Renderer(handSkel);
-		this.handSkel.edges.create({layer: skelLayer, material: meshEdgeMaterial, size: 2}).addTo(this.group);
-		this.handSkel.faces.create({layer: skelLayer, side: THREE.DoubleSide}).addTo(this.group);
+		this.handSkel.edges.create({layer: skelLayer, material: meshEdgeMaterial, size: 2}).addTo(handGroup);
+		this.handSkel.faces.create({layer: skelLayer, side: THREE.DoubleSide}).addTo(handGroup);
 
 		const handScaf = loadCMap2('off', Hand.handScaffold_off);
 		this.handScaf = new Renderer(handScaf);
-		this.handScaf.edges.create({layer: scafLayer, material: scafEdgeMaterial, size: 3}).addTo(this.group);
+		this.handScaf.edges.create({layer: scafLayer, material: scafEdgeMaterial, size: 3}).addTo(handGroup);
 
-
-		// this.handVol = Display.load_volumes_view("mesh", holes_mesh);
 		this.handRawVol = Display.loadVolumesView("mesh", Hand.handRaw_mesh);
 		this.handRawVol.layers.set(rawLayer);
-		this.group.add(this.handRawVol);
+		handGroup.add(this.handRawVol);
 
 		this.handRaw2Vol = Display.loadVolumesView("mesh", Hand.handRaw2_mesh);
 		this.handRaw2Vol.layers.set(raw2Layer);
-		this.group.add(this.handRaw2Vol);
+		handGroup.add(this.handRaw2Vol);
 
 
 		this.handVol = Display.loadVolumesView("mesh", Hand.hand_mesh);
 		this.handVol.layers.set(meshLayer);
-		this.group.add(this.handVol);
+		handGroup.add(this.handVol);
 
 		const axis = new THREE.Vector3(0, 1, 0);
 		this.clock = new Clock(true);
@@ -106,15 +97,7 @@ export const slide_titre = new Slide(
 			this.on = 1 - this.on;
 		};
 
-		const offsetAngle = Math.PI / 3.75;
-		this.handSurface.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handSkel.edges.mesh.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handSkel.faces.mesh.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handScaf.edges.mesh.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handRawVol.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handRaw2Vol.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		this.handVol.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), offsetAngle);
-		
+		handGroup.setRotationFromAxisAngle(new THREE.Vector3(-1,0,0), Math.PI / 3.75);
 
 		this.loop = function(){
 			if(this.running){
