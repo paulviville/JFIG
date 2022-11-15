@@ -16,8 +16,8 @@ import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLi
 export const slide_titre = new Slide(
 	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4)
 	{
-		this.camera = new THREE.PerspectiveCamera(75, DOM_Hand0.width / DOM_Hand0.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0, 1.4);
+		this.camera = new THREE.PerspectiveCamera(45, DOM_Hand0.width / DOM_Hand0.height, 0.1, 1000.0);
+		this.camera.position.set(0, 0, 2);
 
 		const surfaceLayer = 0;
 		const skelLayer = 1;
@@ -103,7 +103,7 @@ export const slide_titre = new Slide(
 			if(this.running){
 				glRenderer.setSize(DOM_Hand0.width, DOM_Hand0.height);
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 60 * this.time);
 				this.camera.layers.enable(skelLayer);
 
 				glRenderer.render(this.scene, this.camera);

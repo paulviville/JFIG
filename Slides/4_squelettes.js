@@ -15,8 +15,8 @@ export const slide_squelettes = new Slide(
 	function(DOM_Skel1D, DOM_Skel2D)
 	{
 		// console.toholesVolumes;
-		this.camera = new THREE.PerspectiveCamera(75, DOM_Skel1D.width / DOM_Skel1D.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0, 0.8);
+		this.camera = new THREE.PerspectiveCamera(45, DOM_Skel1D.width / DOM_Skel1D.height, 0.1, 1000.0);
+		this.camera.position.set(0, 0, 1.3);
 		
 		const surface_layer = 0;
 		const mixte_layer = 1;
@@ -80,7 +80,7 @@ export const slide_squelettes = new Slide(
 		this.loop = function(){
 			if(this.running){
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 50 * this.time);
 
 				this.holes_surface.material.opacity = 0.5;
 				this.holes_surface.material.side = THREE.FrontSide;

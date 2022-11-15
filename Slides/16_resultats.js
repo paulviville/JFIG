@@ -16,10 +16,10 @@ import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLight
 export const slide_results1 = new Slide(
 	function(DOM_Dilo, DOM_Hand)
 	{
-		this.camera0 = new THREE.PerspectiveCamera(75, DOM_Dilo.width / DOM_Dilo.height, 0.1, 1000.0);
-		this.camera0.position.set(0, 0, 0.8);
-		this.camera1 = new THREE.PerspectiveCamera(75, DOM_Hand.width / DOM_Hand.height, 0.1, 1000.0);
-		this.camera1.position.set(0, 0, 1.4);
+		this.camera0 = new THREE.PerspectiveCamera(45, DOM_Dilo.width / DOM_Dilo.height, 0.1, 1000.0);
+		this.camera0.position.set(0, 0.3, 1.3);
+		this.camera1 = new THREE.PerspectiveCamera(45, DOM_Hand.width / DOM_Hand.height, 0.1, 1000.0);
+		this.camera1.position.set(0, 0, 2.55);
 		
 		const handLayer = 1;
 		const diloLayer = 2;
@@ -129,7 +129,7 @@ export const slide_results1 = new Slide(
 		this.loop = function(){
 			if(this.running){
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 45 * this.time);
 
 				this.camera0.layers.enable(diloLayer);
 				glRenderer.setSize(DOM_Dilo.width, DOM_Dilo.height);

@@ -1,36 +1,45 @@
-<div>
-	Génération de Maillages
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+Génération de Maillages
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+<div class="r-hstack">  
 	<div class="r-hstack">  
-		<div class="r-hstack">  
-			<div class="r-vstack">
-				<div>  
-					<img src="Images/SOTA/polycubes.png" height="200px" style="padding-right: 10%; margin: 0px;">
-					<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Polycubes</b></br>[Pietroni et al. 2022]</p>
-				</div>
-				<div>  
-					<img src="Images/SOTA/decomposition.png" height="200px" style="padding-right: 0%; margin: 0px;">
-					<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Décomposition</b></br>[Takayama, 2019]</p>
-				</div>
+		<div class="r-vstack">
+			<div>  
+				<img src="Images/SOTA/polycubes.png" height="200px" style="padding-right: 10%; margin: 0px;">
+				<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Polycubes</b></br>[Pietroni et al. 2022]</p>
 			</div>
-			<div class="r-vstack">
-				<div>  
-					<img src="Images/SOTA/field.png" height="200px" style="padding-right: 10%; margin: 0px;">
-					<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Frame field</b></br>[Liu et al. 2018]</p>
-				</div>
-				<div>  
-					<img src="Images/SOTA/octree.png" height="200px" style="padding-right: 0%; margin: 0px;">
-					<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Octree</b></br>[Livesu et al. 2021]</p>
-				</div>
+			<div>  
+				<img src="Images/SOTA/decomposition.png" height="200px" style="padding-right: 0%; margin: 0px;">
+				<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Décomposition</b></br>[Takayama, 2019]</p>
 			</div>
 		</div>
-		<div>
-			<ul style="font-size: 22px;">
-				<li style="padding-top: 14px;">Appliquées à des domaines quelconques</li>
-				<li style="padding-top: 14px;">Peu de méthodes génériques garanties</li>
-				<li style="padding-top: 14px;">Peu de garanties sur la qualité</li>
-				<li style="padding-top: 14px;">Controle utilisateur important</li>
-			</ul>
+		<div class="r-vstack">
+			<div>  
+				<img src="Images/SOTA/field.png" height="200px" style="padding-right: 10%; margin: 0px;">
+				<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Frame field</b></br>[Liu et al. 2018]</p>
+			</div>
+			<div>  
+				<img src="Images/SOTA/octree.png" height="200px" style="padding-right: 0%; margin: 0px;">
+				<p style="font-size:12px; margin-top: 0px;"><b style="font-size:17px;">Octree</b></br>[Livesu et al. 2021]</p>
+			</div>
 		</div>
 	</div>
+	<div>
+		<ul style="font-size: 22px;">
+			<li style="padding-top: 14px;">Appliquées à des domaines quelconques</li>
+			<li style="padding-top: 14px;">Peu de méthodes génériques garanties</li>
+			<li style="padding-top: 14px;">Peu de garanties sur la qualité</li>
+			<li style="padding-top: 14px;">Controle utilisateur important</li>
+			<li style="padding-top: 24px;">Méthodes spécialisées</li>
+		</ul>
+	</div>
 </div>
+
+<aside class="notes">
+	<br>- Grand nombre de méthodes
+	<br>- Polycubes, Champs de direction, décomposition, octree, etc...
+	<br>- Seul octree garantissent un resultat hex automatique 
+	<br>- Pas de garanties sur l'alignement ou la forme des Maille 
+	<br>- beaucoup d'intervention utilisateur
+
+	<br>- solution : méthodes spécialisées plus simples à produire
+</aside>

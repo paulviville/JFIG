@@ -16,8 +16,8 @@ import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLight
 export const slide_results0 = new Slide(
 	function(DOM_Input, DOM_Output)
 	{
-		this.camera = new THREE.PerspectiveCamera(75, DOM_Input.width / DOM_Input.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0, 0.8);
+		this.camera = new THREE.PerspectiveCamera(45, DOM_Input.width / DOM_Input.height, 0.1, 1000.0);
+		this.camera.position.set(0, 0, 1.3);
 		
 		const surface_layer = 0;
 		const mixte_layer = 1;

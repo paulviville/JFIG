@@ -1,31 +1,29 @@
-<div id="ID">
-	Maillages Hexaédriques
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+Maillages Hexaédriques
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+<div class="r-hstack">
+	<canvas id="hexmesh_holes" width="250" height="440" ></canvas>
 	<div class="r-hstack">
-		<canvas id="hexmesh_holes" width="220" height="440" ></canvas>
-		<div class="r-hstack">
-			<ul style="font-size: 25px;">
-				<li style="padding-top: 0px;">Favorisés pour la simulation</li>
-				<ul style="font-size: 20px;">
-					<li style="padding-top: 0px;">Nombre d'éléments</li>
-					<li style="padding-top: 0px;">Alignement à la surface</li>
-					<li style="padding-top: 0px;">Précision numérique</li>	
-				</ul>
-				<li style="padding-top: 14px;">Notoirement difficiles à produire</li>
-				<ul style="font-size: 20px;">
-					<li style="padding-top: 0px;">Peu de garanties</li>
-					<li style="padding-top: 0px;">Peu de méthodes automatiques</li>
-				</ul>
-
-				<li style="padding-top: 14px;">Méthodes spécialisées</li>
-
+		<ul style="font-size: 25px;">
+			<li style="padding-top: 0px;">Favorisés pour la simulation</li>
+			<ul style="font-size: 20px;">
+				<li style="padding-top: 0px;">Nombre d'éléments</li>
+				<li style="padding-top: 0px;">Alignement à la surface</li>
+				<li style="padding-top: 0px;">Précision numérique</li>	
 			</ul>
-		</div>
-		<div class="fragment" id="1_clipping"></div>
+			<li style="padding-top: 14px;">Notoirement difficiles à produire</li>
+
+
+		</ul>
 	</div>
-	
-
-	<aside class="notes">
-
-	</aside>
+	<div class="fragment" id="1_clipping"></div>
 </div>
+
+
+<aside class="notes">
+	<br>- composé d'hexas: cubes déformés
+	<br>- très demandés en simulation 
+	<br>- bon support de FEM 
+	<br>- bonne description de la surface importante
+	<br>- moins d'éléments que d'autres types de maillages donc moins de calculs
+	<br>- Durs a produire
+</aside>

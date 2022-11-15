@@ -1,25 +1,33 @@
-<div>
-	Algorithme squelette 1D
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
-	<div class="r-hstack">  
-		<div class="r-vstack">  
-			<img src="Images/Algo1D/vessels.png" width="400" style="margin: 0px;">
-			<img src="Images/Algo1D/insertChunk.png" width="400" style="padding-top: 5%; margin: 0px;">
-			<img src="Images/Algo1D/associations.png" width="400" style="padding-top: 5%; margin: 0px;">
-		</div>
-		<div>
-			<ul style="font-size: 25px;">
-				<li style="padding-top: 14px;">Décomposition via un échafaudage</li>
-				<li style="padding-top: 14px;">Insertion de tronçons</li>
-				<li style="padding-top: 14px;">Connexion par l'échafaudage</li>
-				<li style="padding-top: 25px;">Propriétés</li>
-				<ul style="font-size: 22px;">
-					<li style="padding-top: 5px;">Automatique</li>
-					<li style="padding-top: 5px;">Garanti hexaédrique</li>
-					<li style="padding-top: 5px;">Aligné à la surface</li>
-					<li style="padding-top: 5px;">Hautement parallèle</li>
-				</ul>
+Algorithme squelette 1D
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+<div class="r-hstack">  
+	<div class="r-vstack">  
+		<img src="Images/Algo1D/vessels.png" width="400" style="margin: 0px;">
+		<img src="Images/Algo1D/insertChunk.png" width="400" style="padding-top: 5%; margin: 0px;">
+		<img src="Images/Algo1D/associations.png" width="400" style="padding-top: 5%; margin: 0px;">
+	</div>
+	<div>
+		<ul style="font-size: 25px;">
+			<li style="padding-top: 14px;">Décomposition via un échafaudage</li>
+			<li style="padding-top: 14px;">Insertion de tronçons</li>
+			<li style="padding-top: 14px;">Connexion par l'échafaudage</li>
+			<li style="padding-top: 25px;">Propriétés</li>
+			<ul style="font-size: 22px;">
+				<li style="padding-top: 5px;">Automatique</li>
+				<li style="padding-top: 5px;">Garanti hexaédrique</li>
+				<li style="padding-top: 5px;">Aligné à la surface</li>
+				<li style="padding-top: 5px;">Hautement parallèle</li>
 			</ul>
-		</div>
+		</ul>
 	</div>
 </div>
+
+<aside class="notes">
+	<br>- Proposition de méthode spécialisées
+	<br>- Domaines décrits par un squelette courbe
+	<br>- tranche ~ circulaire
+	<br>- basée sur une décomposition du domaine en blocs via échafaudage quad
+	<br>- insertion et connexion de blocs/troncons par l'échafaudage
+	<br>- échafaudage support encodant la connectivité et la géométrie
+	<br>- automatique, garanti hex, aligné à la surface, parallelisable et rapide
+</aside>

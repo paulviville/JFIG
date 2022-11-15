@@ -12,8 +12,8 @@ import {glRenderer, ambiantLightInt, pointLightInt} from './parameters.js';
 export const slide_hexmesh = new Slide(
 	function(DOM_hexmesh)
 	{
-		this.camera = new THREE.PerspectiveCamera(75, DOM_hexmesh.width / DOM_hexmesh.height, 0.1, 1000.0);
-		this.camera.position.set(0, 0, 0.8);
+		this.camera = new THREE.PerspectiveCamera(45, DOM_hexmesh.width / DOM_hexmesh.height, 0.1, 1000.0);
+		this.camera.position.set(0, 0, 1.3);
 		
 		const surfaceLayer = 0;
 		const meshLayer = 1;

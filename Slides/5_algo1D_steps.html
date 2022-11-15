@@ -1,49 +1,56 @@
-<div id="ID">
-	Algorithme squelette 1D
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
-	<div class="r-hstack">
-		<div class="r-vstack">
-			<div class="r-hstack">
-				<div>
-					<canvas id="algo1D_0" width="130" height="215" ></canvas>
-					<p style="font-size:20px; margin-top: -10px;">entrée</p>
-				</div>
-				<div>
-					<canvas id="algo1D_1" width="130" height="215" ></canvas>
-					<p style="font-size:20px; margin-top: -10px;">1 - 2</p>
-				</div>
-				<div>
-					<canvas id="algo1D_2" width="130" height="215" ></canvas>
-					<p style="font-size:20px; margin-top: -10px;">3 - 4</p>
-				</div>
+
+Algorithme squelette 1D
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+<div class="r-hstack">
+	<div class="r-vstack">
+		<div class="r-hstack">
+			<div>
+				<canvas id="algo1D_0" width="130" height="215" ></canvas>
+				<p style="font-size:20px; margin-top: -10px;">entrée</p>
 			</div>
-			<div class="r-hstack" style="margin-top: -10px;;">
-				<div>
-					<canvas id="algo1D_3" width="130" height="215" ></canvas>
-					<p style="font-size:20px; margin-top: -10px;">5 - 6 - 7</p>
-				</div>
-				<div>
-					<canvas id="algo1D_4" width="130" height="215" ></canvas>	
-					<p style="font-size:20px; margin-top: -10px;">sortie</p>
-				</div>
+			<div>
+				<canvas id="algo1D_1" width="130" height="215" ></canvas>
+				<p style="font-size:20px; margin-top: -10px;">1 - 2</p>
+			</div>
+			<div>
+				<canvas id="algo1D_2" width="130" height="215" ></canvas>
+				<p style="font-size:20px; margin-top: -10px;">3 - 4</p>
 			</div>
 		</div>
-
-		<div>
-			<ul style="font-size: 25px;">
-				<li style="padding-top: 14px;">1 - Adaptation du squelette</li>
-				<li style="padding-top: 14px;">2 - Analyse du squelette</li>
-				<li style="padding-top: 14px;">3 - Construction de l'échafaudage</li>
-				<li style="padding-top: 14px;">4 - Propagation de la géométrie</li>
-				<li style="padding-top: 14px;">5 - Insertion des tronçons</li>
-				<li style="padding-top: 14px;">6 - Couture des tronçons</li>
-				<li style="padding-top: 14px;">7 - Transfert de la géométrie</li>
-			</ul>
+		<div class="r-hstack" style="margin-top: -10px;;">
+			<div>
+				<canvas id="algo1D_3" width="130" height="215" ></canvas>
+				<p style="font-size:20px; margin-top: -10px;">5 - 6 - 7</p>
+			</div>
+			<div>
+				<canvas id="algo1D_4" width="130" height="215" ></canvas>	
+				<p style="font-size:20px; margin-top: -10px;">sortie</p>
+			</div>
 		</div>
 	</div>
-	
 
-	<aside class="notes">
-
-	</aside>
+	<div>
+		<ul style="font-size: 25px;">
+			<li style="padding-top: 14px;">1 - Adaptation du squelette</li>
+			<li style="padding-top: 14px;">2 - Analyse du squelette</li>
+			<li style="padding-top: 14px;">3 - Construction de l'échafaudage</li>
+			<li style="padding-top: 14px;">4 - Propagation de la géométrie</li>
+			<li style="padding-top: 14px;">5 - Insertion des tronçons</li>
+			<li style="padding-top: 14px;">6 - Couture des tronçons</li>
+			<li style="padding-top: 14px;">7 - Transfert de la géométrie</li>
+		</ul>
+	</div>
 </div>
+
+
+<aside class="notes">
+	<br>- Algo d'origine
+	<br>- Pipeline complet en 7 étapes
+	<br>- entrée: surface et squelette
+	<br>- adaptation du squelette au rayon
+	<br>- Analyse du squelette
+	<br>- construction de l'échafaudage pour décomposer le domaine en blocs
+	<br>- insertion d'éléments de constructions dans les blocs
+	<br>- transfert de la géométrie de l'échafaudage
+	<br>- maillage brut ensuite raffiné et optimisé
+</aside>

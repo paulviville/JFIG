@@ -1,21 +1,26 @@
-<div>
-	Construction de l'échafaudage
-	<hr style="width: 70%; display:flex; justify-content:space-evenly;">
-	Extrémités et articulations
-	<div class="r-hstack">  
-		<div class="r-vstack">
-			<div>  
-				<img src="Images/Echafaudage/joint3.png" height="180px" style="padding-right: 10%; margin: 0px;">
-				<img src="Images/Echafaudage/joint2.png" height="180px" style="padding-right: 0%; margin: 0px;">
-				<p style="font-size:22px; margin-top: 0px;">Pas de géométrie</p>
-			</div>
+3 - Construction de l'échafaudage
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+Extrémités et articulations
+<div class="r-hstack">  
+	<div class="r-vstack">
+		<div>  
+			<img src="Images/Echafaudage/joint3.png" height="180px" style="padding-right: 10%; margin: 0px;">
+			<img src="Images/Echafaudage/joint2.png" height="180px" style="padding-right: 0%; margin: 0px;">
+			<p style="font-size:22px; margin-top: 0px;">Pas de géométrie</p>
 		</div>
-		<div class="r-vstack">
-			<div>  
-				<img src="Images/Echafaudage/joint1.png" height="180px" style="padding-right: 10%; margin: 0px;">
-				<img src="Images/Echafaudage/joint0.png" height="180px" style="padding-right: 0%; margin: 0px;">
-				<p style="font-size:22px; margin-top: 0px;">Géométrie contrainte</p>
-			</div>
+	</div>
+	<div class="r-vstack">
+		<div>  
+			<img src="Images/Echafaudage/joint1.png" height="180px" style="padding-right: 10%; margin: 0px;">
+			<img src="Images/Echafaudage/joint0.png" height="180px" style="padding-right: 0%; margin: 0px;">
+			<p style="font-size:22px; margin-top: 0px;">Géométrie contrainte</p>
 		</div>
 	</div>
 </div>
+
+<aside class="notes">
+	<br>- placement d'échafaudage sur les articulations et extremités pour la connectivité
+	<br>- 2 types: 
+	<br>- le long des branches -> 1 quad topologique sans contrainte geometrique, libre
+	<br>- articulations branches/feuillet -> 1 quad contraint par direction et normale des feuillets
+</aside>

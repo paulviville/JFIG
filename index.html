@@ -48,6 +48,9 @@
 			import {slide_contributions} from './Slides/17_contributions.js';
 			import {slide_fin} from './Slides/19_fin.js';
 			
+			import RevealNotes from './Reveal/notes/notes.esm.js'
+
+
 			const slides = new Array();
 
 			slides["Titre"] = slide_titre;
@@ -98,7 +101,8 @@
 				touch: false, 
 				slideNumber: 'c/t',
 				transition: 'none',
-				center: true
+				center: true,
+				plugins: [RevealNotes]
 			}).then(() => {
 
 				loadSlideHtml("Title", "./Slides/0_titre.html").then(() => {
