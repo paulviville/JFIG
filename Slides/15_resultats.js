@@ -112,7 +112,7 @@ export const slide_results0 = new Slide(
 		this.loop = function(){
 			if(this.running){
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 130 * this.time);
 
 				this.camera.layers.enable(curve_layer);
 				glRenderer.setSize(DOM_Input.width, DOM_Input.height);
