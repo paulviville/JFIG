@@ -31,6 +31,7 @@
 				<section id="Contributions"></section>
 				<section id="Limites"></section>
 				<section id="Fin"></section>
+				<section id="Plus" data-visibility="uncounted"></section>
 			</div>	
 		</div>
 
@@ -47,6 +48,7 @@
 			import {slide_results1} from './Slides/16_resultats.js';
 			import {slide_contributions} from './Slides/17_contributions.js';
 			import {slide_fin} from './Slides/19_fin.js';
+			import {slide_20plus} from './Slides/20_plus.js';
 			
 			import RevealNotes from './Reveal/notes/notes.esm.js'
 
@@ -62,6 +64,7 @@
 			slides["Result1"] = slide_results1;
 			slides["Contributions"] = slide_contributions;
 			slides["Fin"] = slide_fin;
+			slides["Plus"] = slide_20plus;
 
 			let active_slide;
 			Reveal.addEventListener('slidechanged', function(event) {
@@ -199,6 +202,12 @@
 				loadSlideHtml("Fin", "./Slides/19_fin.html").then(() => {
 					slide_fin.init(
 						document.getElementById("metatron_end")
+					);
+				});
+
+				loadSlideHtml("Plus", "./Slides/20_plus.html").then(() => {
+					slide_20plus.init(
+						document.getElementById("20_sculpture")
 					);
 				});
 
