@@ -25,6 +25,7 @@
 				<section id="Geometry"></section>
 				<section id="Volumes"></section>
 				<section id="Coutures"></section>
+				<section id="Transfert"></section>
 				<section id="Brut"></section>
 				<section id="Result0"></section>
 				<section id="Result1"></section>
@@ -117,7 +118,7 @@
 						document.getElementById("title_hand4")
 					);
 					slide_titre.open();
-					// Reveal.slide(0);
+					Reveal.slide(0);
 				});
 
 
@@ -157,6 +158,7 @@
 				loadSlideHtml("Geometry", "./Slides/11_propagation.html");
 				loadSlideHtml("Volumes", "./Slides/12_insertion.html");
 				loadSlideHtml("Coutures", "./Slides/13_coutures.html");
+				loadSlideHtml("Transfert", "./Slides/13b_transfert.html");
 
 				loadSlideHtml("Brut", "./Slides/14_brut.html").then(() => { 
 					slide_brut.init(
@@ -209,7 +211,6 @@
 						document.getElementById("20_sculpture")
 					);
 				});
-					Reveal.slide(6);
 
 			});
 
