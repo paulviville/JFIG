@@ -2,7 +2,7 @@ import Slide from './Slide.js';
 
 import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
-import * as Display from '../CMapJS/Utils/Display.js';
+import * as Display from './Display.js';
 import * as Holes from '../Files/holes_files.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 

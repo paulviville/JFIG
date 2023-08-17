@@ -3,7 +3,7 @@ import Slide from './Slide.js';
 import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
-import * as Display from '../CMapJS/Utils/Display.js';
+import * as Display from './Display.js';
 import * as Cactus from '../Files/cactus_files.js';
 import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadCMap2} from '../CMapJS/IO/SurfaceFormats/CMap2IO.js';

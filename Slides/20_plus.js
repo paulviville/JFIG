@@ -3,7 +3,7 @@ import Slide from './Slide.js';
 import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
-import * as Display from '../CMapJS/Utils/Display.js';
+import * as Display from './Display.js';
 import * as Metatron from '../Files/metatron_files.js';
 import * as Sculpture from '../Files/sculpture_files.js';
 import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';

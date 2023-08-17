@@ -3,7 +3,7 @@ import Slide from './Slide.js';
 import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
-import * as Display from '../CMapJS/Utils/Display.js';
+import * as Display from './Display.js';
 import * as Hand from '../Files/hand_files.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {loadCMap2} from '../CMapJS/IO/SurfaceFormats/CMap2IO.js';
