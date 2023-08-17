@@ -27,8 +27,10 @@
 				<section id="Coutures"></section>
 				<section id="Transfert"></section>
 				<section id="Brut"></section>
+				<section id="Config"></section>
 				<section id="Result0"></section>
 				<section id="Result1"></section>
+				<section id="Result2"></section>
 				<section id="Contributions"></section>
 				<section id="Limites"></section>
 				<section id="Fin"></section>
@@ -47,8 +49,9 @@
 			import {slide_brut} from './Slides/14_brut.js';
 			import {slide_results0} from './Slides/15_resultats.js';
 			import {slide_results1} from './Slides/16_resultats.js';
+			import {slide_results2} from './Slides/16b_resultats.js';
 			import {slide_contributions} from './Slides/17_contributions.js';
-			import {slide_fin} from './Slides/19_fin.js';
+			// import {slide_fin} from './Slides/19_fin.js';
 			import {slide_20plus} from './Slides/20_plus.js';
 			
 			import RevealNotes from './Reveal/notes/notes.esm.js'
@@ -63,8 +66,9 @@
 			slides["Brut"] = slide_brut;
 			slides["Result0"] = slide_results0;
 			slides["Result1"] = slide_results1;
+			slides["Result2"] = slide_results2;
 			slides["Contributions"] = slide_contributions;
-			slides["Fin"] = slide_fin;
+			// slides["Fin"] = slide_fin;
 			slides["Plus"] = slide_20plus;
 
 			let active_slide;
@@ -106,7 +110,9 @@
 				slideNumber: 'c/t',
 				transition: 'none',
 				center: true,
-				plugins: [RevealNotes]
+				plugins: [RevealNotes],
+				width: 1920,
+				height: 1400
 			}).then(() => {
 
 				loadSlideHtml("Title", "./Slides/0_titre.html").then(() => {
@@ -167,6 +173,9 @@
 					);
 				});
 
+				loadSlideHtml("Config", "./Slides/14b_configrations.html");
+
+
 				loadSlideHtml("Result0", "./Slides/15_resultat.html").then(() => { 
 					slide_results0.init(
 						document.getElementById("result_holes0"),
@@ -190,6 +199,17 @@
 					fragment_events["16_clipping"] = slides["Result1"].toggle_clipping.bind(slides["Result1"]);
 
 				});
+				loadSlideHtml("Result2", "./Slides/16b_resultats.html").then(() => { 
+					slide_results2.init(
+						document.getElementById("result_torusTwist"),
+						document.getElementById("result_vertTurbine")
+					);
+
+					fragment_events["16b_show"] = slides["Result2"].toggle_visible.bind(slides["Result2"]);
+					fragment_events["16b_quality"] = slides["Result2"].toggle_material.bind(slides["Result2"]);
+					fragment_events["16b_clipping"] = slides["Result2"].toggle_clipping.bind(slides["Result2"]);
+
+				});
 				// loadSlideHtml(slideID, path).then(() => { });
 				
 				loadSlideHtml("Contributions", "./Slides/17_contributions.html").then(() => {
@@ -200,17 +220,19 @@
 
 				loadSlideHtml("Limites", "./Slides/18_limites.html");
 				
-				loadSlideHtml("Fin", "./Slides/19_fin.html").then(() => {
-					slide_fin.init(
-						document.getElementById("metatron_end")
-					);
-				});
+				// loadSlideHtml("Fin", "./Slides/19_fin.html").then(() => {
+				// 	slide_fin.init(
+				// 		document.getElementById("metatron_end")
+				// 	);
+				// });
 
 				loadSlideHtml("Plus", "./Slides/20_plus.html").then(() => {
 					slide_20plus.init(
 						document.getElementById("20_sculpture")
 					);
 				});
+
+
 
 			});
 

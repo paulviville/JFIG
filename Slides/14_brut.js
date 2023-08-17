@@ -6,6 +6,8 @@ import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from '../CMapJS/Utils/Display.js';
 import * as Metatron from '../Files/metatron_files.js';
 import * as Holes from '../Files/holes_files.js';
+import * as hand from '../Files/hand_files.js';
+
 import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';

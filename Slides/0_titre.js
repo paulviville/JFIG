@@ -103,7 +103,7 @@ export const slide_titre = new Slide(
 			if(this.running){
 				glRenderer.setSize(DOM_Hand0.width, DOM_Hand0.height);
 				this.time += this.clock.getDelta() * this.on;
-				this.group.setRotationFromAxisAngle(axis, Math.PI / 60 * this.time);
+				this.group.setRotationFromAxisAngle(axis, Math.PI / 90 * this.time);
 				this.camera.layers.enable(skelLayer);
 
 				glRenderer.render(this.scene, this.camera);
