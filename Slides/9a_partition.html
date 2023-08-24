@@ -1,0 +1,54 @@
+<h2>Partition de sphère en quads</h2>
+<hr style="width: 70%; display:flex; justify-content:space-evenly;">
+<div class="r-vstack">  
+	<div class="r-hstack">
+		<div style="padding-right:2%">  
+			<canvas id="SP_init" width="400" height="332" ></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Branching point<br><b style="color:white;">filler</b></p>
+		</div>
+		<div class="fragment" style="padding-right:2%">  
+			<canvas id="SP_Points" width="400" height="332" ></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Branching <picture></picture>oint<br><b style="color:white;">filler</b></p>
+		</div>
+		<div class="fragment" style="padding-right:2%">  
+			<canvas id="SP_Raw" width="400" height="332"></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Delaunay<br>Triangulation</p>
+		</div>
+	</div>
+	<div class="r-hstack">
+		<div class="fragment">  
+			<canvas id="SP_Remesh" width="400" height="332"></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Remeshed Vertices<br>Degree 4</p>
+		</div>
+		<div class="fragment" style="padding-right:2%">  
+			<canvas id="SP_Dual" width="400" height="332"></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Construction<br>of Dual</p>
+		</div>
+		<div class="fragment">  
+			<canvas id="SP_Result" width="400" height="332"></canvas>
+			<p style="font-size:36px; margin-top: 0px;">Resulting<br>Partition</p>
+		</div>
+	</div>
+</div>
+<aside class="notes">
+	<br>- On sait grace à la formule d'euler qu'il existe une partition en n quad de la sphère pour tout n; 
+	<br>- Pour produire ces polyèdres quads nous avons dévellopé un algorithme de partition de sphère en quad
+	<br>-
+	<br>- une sphere est inséré sur l'embranchement et intersectée avec les branches
+	<br>- générer un maillage quad à partir d'un set de point non structurés est difficile 
+	<br>- on inverse donc le problème avec une approche duale.
+	<br>- on veut un maillage a N faces quad, le dual est donc un maillage a N sommets de deg 4
+	<br>- Triangulation de delaunay/enveloppe convexe donne info
+	<br>- 
+	<br>- on veut idéalement des faces convexes contenant leur point branche
+	<br>- -> le voronoi dont le dual est une triangulaiton de delaunay
+	<br>- voronoi souvent pas quad
+	<br>- On va remailler cette triangulation
+	<br>- En ne touchant qu'aux arêtes avec dessupressions et insertions itératives
+	<br>- avec que des sommets de degré 4
+	<br>- pour rester proche du voronoi on minimises opérations
+	<br>- Ensuite on construit le dual composé de quads
+	<br>-
+	<br>- pas réussi à garantir la reussite de l'algo, potentiellement des boucles
+	<br>- Mais plutot bons resultats sur des centaines de configurations générées aléatoirement
+</aside>

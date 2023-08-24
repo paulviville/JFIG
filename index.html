@@ -20,6 +20,7 @@
 				<section id="Blocs"></section>
 				<section id="Adaptation"></section>
 				<section id="Analyse"></section>
+				<section id="Partition"></section>
 				<section id="Echaf0"></section>
 				<section id="Echaf1"></section>
 				<section id="Echaf2"></section>
@@ -32,6 +33,7 @@
 				<section id="Result0"></section>
 				<section id="Result1"></section>
 				<section id="Result2"></section>
+				<section id="Regularity"></section>
 				<section id="Config"></section>
 				<section id="Contributions"></section>
 				<section id="Limites"></section>
@@ -56,7 +58,7 @@
 			import {slide_refine} from './Slides/14c_refining.js';
 			// import {slide_fin} from './Slides/19_fin.js';
 			import {slide_20plus} from './Slides/20_plus.js';
-			
+			import {slide_partition} from './Slides/9a_partition.js';
 			import RevealNotes from './Reveal/notes/notes.esm.js'
 
 
@@ -74,6 +76,7 @@
 			// slides["Fin"] = slide_fin;
 			slides["Plus"] = slide_20plus;
 			slides["Refine"] = slide_refine;
+			slides["Partition"] = slide_partition;
 
 			let active_slide;
 			Reveal.addEventListener('slidechanged', function(event) {
@@ -163,6 +166,17 @@
 				loadSlideHtml("Adaptation", "./Slides/7_adaptation.html");
 				loadSlideHtml("Analyse", "./Slides/8_analyse.html");
 
+				loadSlideHtml("Partition", "./Slides/9a_partition.html").then(() => {
+					slide_partition.init(
+						document.getElementById("SP_init"),
+						document.getElementById("SP_Points"),
+						document.getElementById("SP_Raw"),
+						document.getElementById("SP_Remesh"),
+						document.getElementById("SP_Dual"),
+						document.getElementById("SP_Result")
+					);
+				});
+
 				loadSlideHtml("Echaf0", "./Slides/9_echafaudage.html");
 				loadSlideHtml("Echaf1", "./Slides/10_echafaudage.html");
 				loadSlideHtml("Echaf2", "./Slides/10b_echafaudage.html");
@@ -223,6 +237,7 @@
 
 				});
 				// loadSlideHtml(slideID, path).then(() => { });
+				loadSlideHtml("Regularity", "./Slides/19_fin.html");
 				
 				loadSlideHtml("Contributions", "./Slides/17_contributions.html").then(() => {
 					slide_contributions.init(
