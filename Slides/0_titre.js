@@ -11,10 +11,12 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
-
+const regGraph = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity.ig').then(response => response.text()))
+const regGraph3 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity3.ig').then(response => response.text()))
+const regGraph5 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity5.ig').then(response => response.text()))
 
 export const slide_titre = new Slide(
-	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4)
+	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4, DOM_Hand5)
 	{
 		this.camera = new THREE.PerspectiveCamera(45, DOM_Hand0.width / DOM_Hand0.height, 0.1, 1000.0);
 		this.camera.position.set(0, 0, 2);
@@ -25,18 +27,21 @@ export const slide_titre = new Slide(
 		const rawLayer = 3;
 		const raw2Layer = 4;
 		const meshLayer = 5;
+		const regularityLayer = 6;
 
 		const contextHand0 = DOM_Hand0.getContext('2d');
 		const contextHand1 = DOM_Hand1.getContext('2d');
 		const contextHand2 = DOM_Hand2.getContext('2d');
 		const contextHand3 = DOM_Hand3.getContext('2d');
 		const contextHand4 = DOM_Hand4.getContext('2d');
+		const contextHand5 = DOM_Hand5.getContext('2d');
 
 		const controlsHand0 = new OrbitControls(this.camera, DOM_Hand0);
 		const controlsHand1 = new OrbitControls(this.camera, DOM_Hand1);
 		const controlsHand2 = new OrbitControls(this.camera, DOM_Hand2);
 		const controlsHand3 = new OrbitControls(this.camera, DOM_Hand3);
 		const controlsHand4 = new OrbitControls(this.camera, DOM_Hand4);
+		const controlsHand5 = new OrbitControls(this.camera, DOM_Hand5);
 
 		this.scene = new THREE.Scene()
 		const ambiantLight = new THREE.AmbientLight(0xFFFFFF, ambiantLightInt);
@@ -51,6 +56,8 @@ export const slide_titre = new Slide(
 		pointLight.layers.enable(scafLayer);
 		ambiantLight.layers.enable(rawLayer);
 		pointLight.layers.enable(rawLayer);
+		ambiantLight.layers.enable(meshLayer);
+		pointLight.layers.enable(meshLayer);
 		ambiantLight.layers.enable(meshLayer);
 		pointLight.layers.enable(meshLayer);
 
@@ -83,6 +90,29 @@ export const slide_titre = new Slide(
 		this.handRaw2Vol.layers.set(raw2Layer);
 		handGroup.add(this.handRaw2Vol);
 
+		const regGraphs = new THREE.Group();
+		const reg = new Renderer(regGraph);
+		const reg3 = new Renderer(regGraph3);
+		const reg5 = new Renderer(regGraph5);
+		reg.edges.create({
+			layer: regularityLayer,
+			size: 3,
+			color: new THREE.Color(0x0000ff)
+		});
+		reg.edges.addTo(regGraphs)
+		reg3.edges.create({
+			layer: regularityLayer,
+			size: 3,
+			color: new THREE.Color(0xff0000)
+		});
+		reg3.edges.addTo(regGraphs)
+		reg5.edges.create({
+			layer: regularityLayer,
+			size: 3,
+			color: new THREE.Color(0x00ff00)
+		});
+		reg5.edges.addTo(regGraphs)
+		handGroup.add(regGraphs);
 
 		this.handVol = Display.loadVolumesView("mesh", Hand.hand_mesh);
 		this.handVol.layers.set(meshLayer);
@@ -133,6 +163,12 @@ export const slide_titre = new Slide(
 				contextHand4.clearRect(0, 0, DOM_Hand4.width, DOM_Hand4.height);
 				contextHand4.drawImage(glRenderer.domElement, 0, 0);
 				this.camera.layers.disable(meshLayer);
+
+				this.camera.layers.enable(regularityLayer);
+				glRenderer.render(this.scene, this.camera);
+				contextHand5.clearRect(0, 0, DOM_Hand5.width, DOM_Hand5.height);
+				contextHand5.drawImage(glRenderer.domElement, 0, 0);
+				this.camera.layers.disable(regularityLayer);
 
 				requestAnimationFrame(this.loop.bind(this));
 			}

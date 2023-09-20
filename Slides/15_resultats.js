@@ -4,9 +4,7 @@ import * as THREE from '../CMapJS/Libs/three.module.js';
 import {OrbitControls} from '../CMapJS/Libs/OrbitsControls.js';
 import Renderer from '../CMapJS/Rendering/Renderer.js';
 import * as Display from './Display.js';
-import * as Metatron from '../Files/metatron_files.js';
 import * as Holes from '../Files/holes_files.js';
-import {loadGraph} from '../CMapJS/IO/GraphFormats/GraphIO.js';
 import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGraphIO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
