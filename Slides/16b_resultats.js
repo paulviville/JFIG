@@ -14,6 +14,14 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
+const vertTurbineRegGraph = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity.ig').then(response => response.text()))
+const vertTurbineRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity3.ig').then(response => response.text()))
+// const vertTurbineRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity5.ig').then(response => response.text()))
+
+const torusTwistRegGraph = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity.ig').then(response => response.text()))
+// const torusTwistRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity3.ig').then(response => response.text()))
+// const torusTwistRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity5.ig').then(response => response.text()))
+
 
 export const slide_results2 = new Slide(
 	function(DOM_Torus, DOM_Turbine)
@@ -81,13 +89,85 @@ export const slide_results2 = new Slide(
 		this.dilo_vol.layers.set(diloLayer);
 		this.group.add(this.dilo_vol);
 
+
+
+
+
+
+		const vertTurbineRegGraphs = new THREE.Group();
+		const vertTurbineReg = new Renderer(vertTurbineRegGraph);
+		const vertTurbineReg3 = new Renderer(vertTurbineRegGraph3);
+		// const vertTurbineReg5 = new Renderer(vertTurbineRegGraph5);
+		vertTurbineReg.edges.create({
+			layer: handLayer,
+			size: 6,
+			color: new THREE.Color(0x0000ff)
+		});
+		vertTurbineReg.edges.addTo(vertTurbineRegGraphs)
+		vertTurbineReg3.edges.create({
+			layer: handLayer,
+			size: 6,
+			color: new THREE.Color(0xff0000)
+		});
+		vertTurbineReg3.edges.addTo(vertTurbineRegGraphs)
+		// handReg5.edges.create({
+		// 	layer: handLayer,
+		// 	size: 3,
+		// 	color: new THREE.Color(0x00ff00)
+		// });
+		// handReg5.edges.addTo(vertTurbineRegGraphs)
+		this.group.add(vertTurbineRegGraphs)
+		vertTurbineRegGraphs.visible = false;
+		vertTurbineRegGraphs.position.set(0, -1.8, 0);
+
+		const torusTwistRegGraphs = new THREE.Group();
+		const torusTwistReg = new Renderer(torusTwistRegGraph);
+		// const torusTwistReg3 = new Renderer(torusTwistRegGraph3);
+		// const torusTwistReg5 = new Renderer(torusTwistRegGraph5);
+		torusTwistReg.edges.create({
+			layer: diloLayer,
+			size:5,
+			color: new THREE.Color(0x0000ff)
+		});
+		torusTwistReg.edges.addTo(torusTwistRegGraphs)
+		
+		// torusTwistReg3.edges.create({
+		// 	layer: diloLayer,
+		// 	size: 1.5,
+		// 	color: new THREE.Color(0xff0000)
+		// });
+		// torusTwistReg3.edges.addTo(torusTwistRegGraphs)
+		// torusTwistReg5.edges.create({
+		// 	layer: diloLayer,
+		// 	size: 1.5,
+		// 	color: new THREE.Color(0x00ff00)
+		// });
+		// torusTwistReg5.edges.addTo(torusTwistRegGraphs)
+		this.group.add(torusTwistRegGraphs)
+		torusTwistRegGraphs.visible = false;
+
+
+
+
+
+
+
+
 		const axis = new THREE.Vector3(0, 1, 0);
 		this.clock = new Clock(true);
 		this.time = 0;
+
+
+
+
+
 		
 		this.toggle_clipping = function(){
 			this.hand_vol.material.uniforms.clipping.value = 1 - this.hand_vol.material.uniforms.clipping.value;
 			this.dilo_vol.material.uniforms.clipping.value = 1 - this.dilo_vol.material.uniforms.clipping.value;
+			torusTwistRegGraphs.visible = !torusTwistRegGraphs.visible;
+			vertTurbineRegGraphs.visible = !vertTurbineRegGraphs.visible;
+
 		};
 
 		this.toggle_visible = function(){
@@ -116,7 +196,9 @@ export const slide_results2 = new Slide(
 		this.dilo_skel.edges.mesh.setRotationFromAxisAngle(offsetAxisDilo, offsetAngleDilo);
 		this.dilo_skel.faces.mesh.setRotationFromAxisAngle(offsetAxisDilo, offsetAngleDilo);
 		this.dilo_vol.setRotationFromAxisAngle(offsetAxisDilo, offsetAngleDilo);
-		
+		// vertTurbineRegGraphs.setRotationFromAxisAngle(offsetAxisDilo, offsetAngleDilo);
+		torusTwistRegGraphs.setRotationFromAxisAngle(offsetAxisDilo, offsetAngleDilo);
+
 		// const offsetAngleHand = Math.PI/2;
 		// const offsetAxisHand = new THREE.Vector3(0, 0.3, -10);
 		// this.hand_surface.setRotationFromAxisAngle(offsetAxisHand, offsetAngleHand);
