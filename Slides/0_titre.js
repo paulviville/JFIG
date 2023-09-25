@@ -11,9 +11,9 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
-const regGraph = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity.ig').then(response => response.text()))
-const regGraph3 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity3.ig').then(response => response.text()))
-const regGraph5 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity5.ig').then(response => response.text()))
+const regGraph = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity.ig').then(response => response.text()))
+const regGraph3 = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity3.ig').then(response => response.text()))
+const regGraph5 = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity5.ig').then(response => response.text()))
 
 export const slide_titre = new Slide(
 	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4, DOM_Hand5)
