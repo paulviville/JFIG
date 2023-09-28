@@ -11,16 +11,15 @@ import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
 
+import { dilo_regularity3_ig, dilo_regularity5_ig, dilo_regularity_ig, hand_regularity3_ig, hand_regularity5_ig, hand_regularity_ig } from '../Files/regularity.js';
 
-const handRegGraph = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity.ig').then(response => response.text()))
-const handRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity3.ig').then(response => response.text()))
-const handRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/hand_regularity5.ig').then(response => response.text()))
+const handRegGraph = loadIncidenceGraph("ig", hand_regularity_ig)
+const handRegGraph3 = loadIncidenceGraph("ig", hand_regularity3_ig)
+const handRegGraph5 = loadIncidenceGraph("ig", hand_regularity5_ig)
 
-const diloRegGraph = loadIncidenceGraph("ig", await fetch('../Files/dilo_regularity.ig').then(response => response.text()))
-const diloRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/dilo_regularity3.ig').then(response => response.text()))
-const diloRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/dilo_regularity5.ig').then(response => response.text()))
-
-
+const diloRegGraph = loadIncidenceGraph("ig", dilo_regularity_ig)
+const diloRegGraph3 = loadIncidenceGraph("ig", dilo_regularity3_ig)
+const diloRegGraph5 = loadIncidenceGraph("ig", dilo_regularity5_ig)
 
 export const slide_results1 = new Slide(
 	function(DOM_Dilo, DOM_Hand)

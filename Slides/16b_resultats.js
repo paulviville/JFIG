@@ -13,14 +13,13 @@ import {loadIncidenceGraph} from '../CMapJS/IO/IncidenceGraphFormats/IncidenceGr
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, meshEdgeColor, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
+import { torusTwist_regularity_ig, vertTurbine_regularity3_ig, vertTurbine_regularity_ig } from '../Files/regularity.js';
 
-const vertTurbineRegGraph = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity.ig').then(response => response.text()))
-const vertTurbineRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity3.ig').then(response => response.text()))
-// const vertTurbineRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/vertTurbine_regularity5.ig').then(response => response.text()))
 
-const torusTwistRegGraph = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity.ig').then(response => response.text()))
-// const torusTwistRegGraph3 = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity3.ig').then(response => response.text()))
-// const torusTwistRegGraph5 = loadIncidenceGraph("ig", await fetch('../Files/torusTwist_regularity5.ig').then(response => response.text()))
+const vertTurbineRegGraph = loadIncidenceGraph("ig", vertTurbine_regularity_ig)
+const vertTurbineRegGraph3 = loadIncidenceGraph("ig", vertTurbine_regularity3_ig)
+
+const torusTwistRegGraph = loadIncidenceGraph("ig", torusTwist_regularity_ig)
 
 
 export const slide_results2 = new Slide(

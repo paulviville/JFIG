@@ -10,11 +10,11 @@ import {loadCMap2} from '../CMapJS/IO/SurfaceFormats/CMap2IO.js';
 import {Clock} from '../CMapJS/Libs/three.module.js';
 
 import {glRenderer, scafEdgeMaterial, meshEdgeMaterial, ambiantLightInt, pointLightInt} from './parameters.js';
+import { hand_regularity3_ig, hand_regularity5_ig, hand_regularity_ig } from '../Files/regularity.js';
 
-const regGraph = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity.ig').then(response => response.text()))
-const regGraph3 = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity3.ig').then(response => response.text()))
-const regGraph5 = loadIncidenceGraph("ig", await fetch('/Files/hand_regularity5.ig').then(response => response.text()))
-
+const regGraph = loadIncidenceGraph("ig", hand_regularity_ig)
+const regGraph3 = loadIncidenceGraph("ig", hand_regularity3_ig)
+const regGraph5 = loadIncidenceGraph("ig", hand_regularity5_ig)
 export const slide_titre = new Slide(
 	function(DOM_Hand0, DOM_Hand1, DOM_Hand2, DOM_Hand3, DOM_Hand4, DOM_Hand5)
 	{

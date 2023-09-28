@@ -78,6 +78,7 @@ export const slide_20plus = new Slide(
 		this.toggleVisible = function(){
 			this.metatronVol.visible = !this.metatronVol.visible;
 		};
+		// this.toggleVisible();
 
 		this.on = 1;
 		this.pause = function(){
